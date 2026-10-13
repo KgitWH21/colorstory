@@ -1,6 +1,6 @@
 COLOR STORY — A writer’s color wheel
 
-208 named shades, sensory associations, story-name prompts, HEX/RGB values,
+416 named shades, sensory associations, story-name prompts, HEX/RGB values,
 and three companion-color modes. No accounts, API keys, dependencies, or build step.
 
 TRY IT ON YOUR COMPUTER
@@ -19,7 +19,7 @@ EDIT IN VS CODE
 Open the extracted folder. colors.js contains the color collection.
 Each row is [HEX, shade name, four associations separated by ;, story name].
 style.css controls the layout. app.js controls the wheel and palette matching.
-The wheel shows all 208 discrete swatches and lands on the selected shade.
+The wheel shows all 416 discrete swatches and lands on the selected shade.
 Companion colors are selected approximately by hue, saturation, and lightness.
 Names and associations are editorial suggestions; HEX/RGB values are exact.
 
