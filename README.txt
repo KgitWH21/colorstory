@@ -19,9 +19,26 @@ EDIT IN VS CODE
 Open the extracted folder. colors.js contains the color collection.
 Each row is [HEX, shade name, four associations separated by ;, story name].
 style.css controls the layout. app.js controls the wheel and palette matching.
-The wheel shows all 416 discrete swatches and lands on the selected shade.
+The smooth wheel represents the flow of hues; its center shows the exact
+selected shade. All 416 shades remain selectable. Drag with a finger or mouse
+and release to coast and land on a named shade. The Spin button picks randomly.
+Arrow keys browse shades, Space/Enter spins, and Escape stops motion. Color
+information appears below the larger wheel. Reduced motion skips coasting.
+wheel.js controls direct rotation, momentum, snapping, and keyboard input.
 Companion colors are selected approximately by hue, saturation, and lightness.
 Names and associations are editorial suggestions; HEX/RGB values are exact.
+
+COLOR SEARCH
+Search everyday color names (green, blue, red, yellow, orange, purple, pink,
+brown, gray/grey, black, or white), full or partial shade names, or 3/6-digit
+HEX values. Similar shades shows broad color families or the closest named
+shades by perceived color distance. Companion colors shows Contrast, Neighbors,
+or Same family pairings with a visible, changeable base shade. Related imagery
+uses curated color vocabulary and the collection's sensory associations; you
+can also search images such as moss, sea glass, or leather in this mode.
+Tap a result to select it on the wheel and read its associations and story.
+Show more reveals additional results. All search modes work offline.
+search.js contains matching rules and the curated imagery vocabulary.
 
 OFFLINE UPDATES
 After changing files, increment CACHE in sw.js, redeploy, and reload online.
