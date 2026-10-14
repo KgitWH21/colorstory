@@ -1441,4 +1441,2925 @@ const extraAssociations = {
     ]
   ]
 };
-const colors = families.flatMap(([family, rows])=>rows.map(([hex,name,associations,story],i)=>({family,hex,name,associations:[...associations.split(";"),...(i<8?extraAssociations[family][i]:[])],story})));
+// BEGIN WRITER EXPANSION
+// Curated pigment motifs; HEX values selected offline for perceptual separation.
+const writerExpansion = [
+  [
+    "Black",
+    "#000000",
+    "Absolute black",
+    "unlit space;black ink;lightless velvet;deep shadow",
+    "The absolute black coat"
+  ],
+  [
+    "Black",
+    "#040303",
+    "Pitch black",
+    "tar;pitch;black lacquer;charred resin",
+    "The pitch black door"
+  ],
+  [
+    "Black",
+    "#111820",
+    "Obsidian",
+    "obsidian glass;polished black stone;dark blades;volcanic fragments",
+    "The obsidian letter"
+  ],
+  [
+    "Black",
+    "#1D1410",
+    "Black coffee",
+    "coffee grounds;dark roast beans;scorched wood;wet bark",
+    "The black coffee window"
+  ],
+  [
+    "Black",
+    "#281A12",
+    "Bitter chocolate",
+    "bitter chocolate;roasted cacao;dark leather;burned sugar",
+    "The bitter chocolate stone"
+  ],
+  [
+    "Black",
+    "#0A1C10",
+    "Black forest",
+    "evergreen shadows;wet holly leaves;dark green wool;forest pools",
+    "The black forest ribbon"
+  ],
+  [
+    "Black",
+    "#10201B",
+    "Green-black ink",
+    "green-black ink;dark leaves;green bottle shadows;wet moss",
+    "The green-black ink coat"
+  ],
+  [
+    "Black",
+    "#24261A",
+    "Black olive",
+    "black olive skins;dark olive canvas;shaded bay leaves;olive wood",
+    "The black olive door"
+  ],
+  [
+    "Black",
+    "#260F19",
+    "Blackened burgundy",
+    "wine sediment;dark burgundy velvet;red lacquer shadows;dried petals",
+    "The blackened burgundy letter"
+  ],
+  [
+    "Black",
+    "#19070E",
+    "Black cherry ink",
+    "black cherry skins;berry ink;dark fruit juice;red-black glass",
+    "The black cherry ink window"
+  ],
+  [
+    "Black",
+    "#221025",
+    "Black plum",
+    "plum skins;purple velvet folds;dark purple ink;berry shadows",
+    "The black plum stone"
+  ],
+  [
+    "Black",
+    "#1B0B1D",
+    "Aubergine ink",
+    "eggplant skin;purple-black ink;dark satin;violet shadows",
+    "The aubergine ink ribbon"
+  ],
+  [
+    "Black",
+    "#061817",
+    "Black petrol",
+    "deep water;dark teal tiles;petrol-colored enamel;green-blue ink",
+    "The black petrol coat"
+  ],
+  [
+    "Black",
+    "#050C1C",
+    "Raven black",
+    "raven feathers;blue-black satin;night glass;ink-dark water",
+    "The raven black door"
+  ],
+  [
+    "Black",
+    "#07122B",
+    "Black sapphire",
+    "dark sapphire;blue-black glass;polished blue stone;naval silk",
+    "The black sapphire letter"
+  ],
+  [
+    "Black",
+    "#1A1A1A",
+    "Black basalt",
+    "wet basalt;black paving;volcanic stone;dark mineral dust",
+    "The black basalt window"
+  ],
+  [
+    "Black",
+    "#302A1F",
+    "Ivory black",
+    "warm black pigment;blackened bone;dark canvas;charred wood",
+    "The ivory black stone"
+  ],
+  [
+    "Black",
+    "#2D1D1F",
+    "Mars black",
+    "iron-black pigment;dark rust seams;blackened iron;burned clay",
+    "The mars black ribbon"
+  ],
+  [
+    "Black",
+    "#310D27",
+    "Midnight mulberry",
+    "mulberry skins;purple-red velvet;dark jam;wine-black silk",
+    "The midnight mulberry coat"
+  ],
+  [
+    "Black",
+    "#05120F",
+    "Black spruce ink",
+    "spruce needle shadows;deep green ink;dark resin;wet evergreen bark",
+    "The black spruce ink door"
+  ],
+  [
+    "Black",
+    "#1A1D28",
+    "Smoked onyx",
+    "smoked onyx;dark gray glass;polished stone;blackened steel",
+    "The smoked onyx letter"
+  ],
+  [
+    "Black",
+    "#241037",
+    "Black amethyst",
+    "amethyst shadows;purple-black crystal;dark violet silk;ink-black petals",
+    "The black amethyst window"
+  ],
+  [
+    "Black",
+    "#110E1C",
+    "Black ink",
+    "dried black ink;dark paper edges;violet-black stains;matte black cloth",
+    "The black ink stone"
+  ],
+  [
+    "Black",
+    "#16082B",
+    "Black indigo",
+    "indigo-black dye;night-blue cloth;dark violet ink;dyed yarn",
+    "The black indigo ribbon"
+  ],
+  [
+    "Red",
+    "#EB1525",
+    "Signal red",
+    "signal lamps;red enamel;fresh cherries;painted buoys",
+    "The warning lamp"
+  ],
+  [
+    "Orange",
+    "#FF6200",
+    "Flame orange",
+    "flame tips;orange safety cloth;fresh peel;signal flags",
+    "The flame in the kiln"
+  ],
+  [
+    "Gold",
+    "#F5E500",
+    "Lemon yellow",
+    "lemon peel;yellow ink;citrus sweets;bright glazed tiles",
+    "The lemon grove"
+  ],
+  [
+    "Gold",
+    "#FFEF00",
+    "Canary yellow",
+    "canary feathers;yellow ribbons;painted shutters;bright cotton",
+    "The birdcage"
+  ],
+  [
+    "Yellow green",
+    "#B6EE18",
+    "Electric lime",
+    "lime-colored ink;bright green glass;fresh zest;festival paper",
+    "The lime-colored sign"
+  ],
+  [
+    "Green",
+    "#18B347",
+    "Kelly green",
+    "green sports cloth;fresh clover;painted gates;bright enamel",
+    "The green jersey"
+  ],
+  [
+    "Green",
+    "#53A52A",
+    "Grass green",
+    "fresh grass;leaf blades;green paint;cut stems",
+    "The freshly mown field"
+  ],
+  [
+    "Cyan",
+    "#00A8D6",
+    "Cyan ink",
+    "cyan printing ink;bright blue glass;pool tiles;painted signs",
+    "The printing press"
+  ],
+  [
+    "Blue",
+    "#2055D8",
+    "Cobalt",
+    "cobalt pigment;blue glass;painted porcelain;deep blue silk",
+    "The cobalt jar"
+  ],
+  [
+    "Blue",
+    "#3533B8",
+    "Ultramarine",
+    "ultramarine paint;lapis dust;blue cloth;mineral pigment",
+    "The lapis workshop"
+  ],
+  [
+    "Violet",
+    "#7920DC",
+    "Electric violet",
+    "violet light;bright purple ink;dyed silk;colored glass",
+    "The violet-lit window"
+  ],
+  [
+    "Pink",
+    "#D520BA",
+    "Fuchsia",
+    "fuchsia flowers;bright magenta silk;berry dye;pink-purple glass",
+    "The fuchsia basket"
+  ],
+  [
+    "Pink",
+    "#F52C95",
+    "Hot pink",
+    "hot-pink ink;bright satin;festival paper;painted toys",
+    "The pink festival banner"
+  ],
+  [
+    "Red",
+    "#F92D1A",
+    "Flare red",
+    "road flares;festival cloth;red peppers;hot embers",
+    "The roadside flare"
+  ],
+  [
+    "Red",
+    "#E74727",
+    "Coquelicot",
+    "poppy petals;red-orange silk;painted masks;bright lacquer",
+    "The field of poppies"
+  ],
+  [
+    "Red",
+    "#CB1A10",
+    "Cadmium red",
+    "artist's pigment;red paint tubes;vermilion cloth;glazed pottery",
+    "The open paint box"
+  ],
+  [
+    "Red",
+    "#D01147",
+    "Cardinal red",
+    "cardinal feathers;ceremonial robes;red ribbons;berry skins",
+    "The bird at the window"
+  ],
+  [
+    "Red",
+    "#E50649",
+    "Cherry lacquer",
+    "lacquered boxes;cherry skins;red glass;polished beads",
+    "The lacquer box"
+  ],
+  [
+    "Rust",
+    "#C53F16",
+    "Cinnabar earth",
+    "mineral dust;red sandstone;iron-rich clay;earthen bowls",
+    "The mineral seam"
+  ],
+  [
+    "Rust",
+    "#B34C14",
+    "Burnt copper",
+    "copper filings;heated metal;orange-brown glaze;firelit stone",
+    "The copper workshop"
+  ],
+  [
+    "Rust",
+    "#D44C11",
+    "Mars orange",
+    "earth pigment;orange clay;brick powder;warm plaster",
+    "The painter's courtyard"
+  ],
+  [
+    "Orange",
+    "#F97B06",
+    "Kumquat",
+    "kumquat skins;citrus sweets;orange enamel;bright paper",
+    "The kumquat stall"
+  ],
+  [
+    "Orange",
+    "#EE5F2B",
+    "Nasturtium",
+    "nasturtium petals;orange silk;spiced oil;glazed terracotta",
+    "The garden gate"
+  ],
+  [
+    "Orange",
+    "#FAAD29",
+    "Calendula",
+    "calendula petals;orange dye;golden peel;woven garlands",
+    "The garland maker"
+  ],
+  [
+    "Orange",
+    "#ED6E0C",
+    "Papaya",
+    "papaya flesh;orange sorbet;fruit juice;sunlit glass",
+    "The fruit seller"
+  ],
+  [
+    "Orange",
+    "#D0850B",
+    "Amber resin",
+    "amber resin;pine sap;orange glass;varnished wood",
+    "The resin pendant"
+  ],
+  [
+    "Orange",
+    "#FB905B",
+    "Tiger lily",
+    "lily petals;orange cloth;butterfly wings;bright glaze",
+    "The lily beside the fence"
+  ],
+  [
+    "Orange",
+    "#FF4B1F",
+    "Fire opal",
+    "fire opal;red-orange glass;glowing coals;polished stone",
+    "The stone in the jeweler's tray"
+  ],
+  [
+    "Gold",
+    "#DFEF06",
+    "Sulfur yellow",
+    "sulfur crystals;yellow mineral powder;acid-yellow glass;lichen edges",
+    "The mineral cabinet"
+  ],
+  [
+    "Gold",
+    "#FFD000",
+    "Chrome yellow",
+    "chrome-yellow pigment;yellow enamel;painted machinery;bright signs",
+    "The yellow sign"
+  ],
+  [
+    "Gold",
+    "#E0C306",
+    "Cadmium yellow",
+    "paint tubes;yellow canvas;golden petals;bright lacquer",
+    "The painter's easel"
+  ],
+  [
+    "Gold",
+    "#E2DC32",
+    "Broom blossom",
+    "broom flowers;yellow silk;pollen dust;spring garlands",
+    "The lane beside the hedge"
+  ],
+  [
+    "Gold",
+    "#D1AE00",
+    "Citrine",
+    "citrine facets;yellow glass;golden resin;polished beads",
+    "The gemstone tray"
+  ],
+  [
+    "Gold",
+    "#FFE552",
+    "Buttercup",
+    "buttercup petals;yellow satin;sunlit pollen;glazed bowls",
+    "The meadow path"
+  ],
+  [
+    "Gold",
+    "#FFFF29",
+    "Forsythia",
+    "forsythia branches;yellow paper;spring petals;bright woven cloth",
+    "The first flowering branch"
+  ],
+  [
+    "Yellow green",
+    "#7CD912",
+    "Apple green",
+    "green apple skins;young vine leaves;green enamel;fruit candy",
+    "The orchard basket"
+  ],
+  [
+    "Yellow green",
+    "#D9FF00",
+    "Acid yellow",
+    "acid-yellow pigment;yellow-green glass;citrus candy;bright lichen",
+    "The unexpected stain"
+  ],
+  [
+    "Yellow green",
+    "#67CF17",
+    "Kiwi green",
+    "kiwi flesh;green fruit juice;fresh leaves;glazed beads",
+    "The fruit on the cutting board"
+  ],
+  [
+    "Yellow green",
+    "#AFE755",
+    "Lime sherbet",
+    "lime sherbet;green candy;fresh citrus pulp;bright ceramics",
+    "The ice-cream counter"
+  ],
+  [
+    "Yellow green",
+    "#A1C91D",
+    "Gooseberry",
+    "gooseberry skins;green-gold glass;young seeds;leaf veins",
+    "The gooseberry patch"
+  ],
+  [
+    "Yellow green",
+    "#69ED21",
+    "Lettuce green",
+    "lettuce leaves;green cotton;garden shoots;vegetable skins",
+    "The kitchen garden bed"
+  ],
+  [
+    "Yellow green",
+    "#8FFF1F",
+    "Parrot lime",
+    "parrot feathers;bright leaf edges;green ribbons;painted toys",
+    "The aviary door"
+  ],
+  [
+    "Green",
+    "#049F66",
+    "Emerald",
+    "emerald facets;green glass;silk ribbons;polished enamel",
+    "The emerald clasp"
+  ],
+  [
+    "Green",
+    "#089168",
+    "Viridian",
+    "viridian paint;green ceramic glaze;deep green glass;wet leaves",
+    "The studio sink"
+  ],
+  [
+    "Green",
+    "#0EAA1D",
+    "Chromium green",
+    "green pigment;painted metal;leaf shadows;glazed pottery",
+    "The pigment shelf"
+  ],
+  [
+    "Green",
+    "#16F372",
+    "Spring green",
+    "spring shoots;green silk;bright garden leaves;backlit glass",
+    "The first new shoot"
+  ],
+  [
+    "Green",
+    "#3BE392",
+    "Beryl green",
+    "beryl crystals;green crystal glass;fresh stems;translucent beads",
+    "The crystal collection"
+  ],
+  [
+    "Green",
+    "#0DA54F",
+    "Jungle green",
+    "tropical leaves;wet vines;deep green enamel;fern fronds",
+    "The jungle footbridge"
+  ],
+  [
+    "Green",
+    "#12D939",
+    "Shamrock",
+    "shamrock leaves;green ribbons;fresh parsley;painted wood",
+    "The clover beneath the step"
+  ],
+  [
+    "Green",
+    "#08963A",
+    "Billiard green",
+    "billiard cloth;green felt;emerald wool;dark glazed tiles",
+    "The empty billiard room"
+  ],
+  [
+    "Teal",
+    "#06F4D8",
+    "Electric aqua",
+    "aqua ink;bright pool reflections;blue-green glass;glossy tiles",
+    "The illuminated pool"
+  ],
+  [
+    "Teal",
+    "#05B38A",
+    "Persian green",
+    "green-blue tiles;glazed ceramics;woven silk;polished beads",
+    "The tiled archway"
+  ],
+  [
+    "Teal",
+    "#11D0C9",
+    "Caribbean teal",
+    "clear lagoon water;teal enamel;blue-green beads;painted boats",
+    "The island jetty"
+  ],
+  [
+    "Teal",
+    "#16C591",
+    "Peacock green",
+    "peacock feather eyes;green silk;iridescent beetle wings;glazed beads",
+    "The peacock in the courtyard"
+  ],
+  [
+    "Teal",
+    "#3AE9BD",
+    "Amazonite",
+    "amazonite stone;blue-green enamel;bright mineral seams;polished cabochons",
+    "The stone cutter's bench"
+  ],
+  [
+    "Teal",
+    "#0EA9AF",
+    "Chrysocolla",
+    "chrysocolla veins;blue-green mineral dust;ceramic glaze;colored glass",
+    "The mineral stall"
+  ],
+  [
+    "Teal",
+    "#51F6B9",
+    "Mint enamel",
+    "mint enamel;bright candy;glossy green glaze;sunlit bottle glass",
+    "The painted mint tin"
+  ],
+  [
+    "Cyan",
+    "#06DBEF",
+    "Electric turquoise",
+    "turquoise enamel;bright lagoon water;blue-green silk;colored beads",
+    "The lit aquarium"
+  ],
+  [
+    "Cyan",
+    "#0B92D0",
+    "Pacific cyan",
+    "clear sea water;blue glass;bright tiles;painted shutters",
+    "The open sea crossing"
+  ],
+  [
+    "Cyan",
+    "#2FE7F4",
+    "Aqua enamel",
+    "aqua enamel;glazed bowls;bright pool liners;blue-green glass",
+    "The enamel pitcher"
+  ],
+  [
+    "Cyan",
+    "#1399EC",
+    "Blue zircon",
+    "zircon facets;blue gemstones;crystal glass;polished enamel",
+    "The zircon ring"
+  ],
+  [
+    "Cyan",
+    "#10BFF9",
+    "Capri blue",
+    "blue grotto water;cyan silk;sunlit sea;bright blue tiles",
+    "The grotto entrance"
+  ],
+  [
+    "Cyan",
+    "#3DD2FF",
+    "Swimming-pool blue",
+    "pool water;blue plastic;bright aqua glaze;sunlit glass",
+    "The swimming lane"
+  ],
+  [
+    "Blue",
+    "#3B248F",
+    "Indigo",
+    "indigo dye;blue-violet cloth;ink washes;dyed yarn",
+    "The indigo vat"
+  ],
+  [
+    "Blue",
+    "#0614E0",
+    "Klein blue",
+    "intense blue pigment;matte blue paint;blue canvas;dyed paper",
+    "The blue canvas"
+  ],
+  [
+    "Blue",
+    "#0A51C2",
+    "Egyptian blue",
+    "blue frit;painted stone;blue faience;mineral powder",
+    "The painted tomb wall"
+  ],
+  [
+    "Blue",
+    "#0C35E9",
+    "International blue",
+    "blue flags;painted signs;blue ribbons;bright enamel",
+    "The flag above the station"
+  ],
+  [
+    "Blue",
+    "#1E78E6",
+    "King's blue",
+    "blue silk;painted china;blue glass;ceremonial cloth",
+    "The royal-blue curtain"
+  ],
+  [
+    "Blue",
+    "#243DCC",
+    "Smalt",
+    "smalt glass;ground blue pigment;glazed beads;blue tiles",
+    "The glassmaker's furnace"
+  ],
+  [
+    "Blue",
+    "#0E36AF",
+    "Lapis lazuli",
+    "lapis stone;blue cabochons;mineral veins;painted amulets",
+    "The stone in the pouch"
+  ],
+  [
+    "Blue",
+    "#0A91FF",
+    "Electric blue",
+    "electric-blue ink;bright signs;blue lights;glossy enamel",
+    "The glowing blue sign"
+  ],
+  [
+    "Violet",
+    "#620C97",
+    "Dioxazine violet",
+    "violet paint;purple pigment;dark petals;ink stains",
+    "The violet paint tube"
+  ],
+  [
+    "Violet",
+    "#3A11D0",
+    "Gentian",
+    "gentian petals;blue-violet glass;bright dye;silk ribbons",
+    "The mountain flower"
+  ],
+  [
+    "Violet",
+    "#5B1AB7",
+    "Pansy violet",
+    "pansy petals;purple cloth;violet glaze;painted beads",
+    "The pot of pansies"
+  ],
+  [
+    "Violet",
+    "#553FE4",
+    "Campanula",
+    "bellflower petals;violet-blue ink;bright ribbons;glazed ceramic",
+    "The bellflowers by the wall"
+  ],
+  [
+    "Violet",
+    "#A506EA",
+    "Spectrum violet",
+    "violet pigment;purple light;dyed paper;bright enamel",
+    "The prism on the desk"
+  ],
+  [
+    "Violet",
+    "#611EE6",
+    "Fluorite violet",
+    "fluorite crystals;purple mineral veins;translucent beads;colored glass",
+    "The fluorite specimen"
+  ],
+  [
+    "Violet",
+    "#6F0AC2",
+    "Aniline violet",
+    "aniline dye;violet silk;purple ink;stained cotton",
+    "The dye maker's table"
+  ],
+  [
+    "Purple",
+    "#971188",
+    "Tyrian purple",
+    "purple-dyed wool;dark silk;berry stains;ceremonial cloth",
+    "The purple robe"
+  ],
+  [
+    "Purple",
+    "#A410C1",
+    "Royal purple",
+    "purple velvet;bright brocade;colored glass;dyed ribbons",
+    "The ceremonial room"
+  ],
+  [
+    "Purple",
+    "#E406F4",
+    "Electric purple",
+    "purple ink;bright lights;dyed silk;glossy enamel",
+    "The purple neon sign"
+  ],
+  [
+    "Purple",
+    "#E43FE1",
+    "Cattleya",
+    "orchid petals;purple silk;floral ribbons;colored beads",
+    "The orchid display"
+  ],
+  [
+    "Purple",
+    "#A11276",
+    "Byzantium",
+    "purple-red silk;dark berry juice;dyed wool;embroidered cloth",
+    "The embroidered cloak"
+  ],
+  [
+    "Purple",
+    "#B71EE6",
+    "Petunia purple",
+    "petunia petals;bright fabric;purple glaze;flower dye",
+    "The hanging flower basket"
+  ],
+  [
+    "Purple",
+    "#F320CD",
+    "Phlox purple",
+    "phlox flowers;purple-pink silk;bright ribbons;dyed paper",
+    "The phlox border"
+  ],
+  [
+    "Purple",
+    "#CE34F4",
+    "Purple enamel",
+    "purple enamel;painted jewelry;bright ceramic glaze;glass ornaments",
+    "The enameled brooch"
+  ],
+  [
+    "Pink",
+    "#ED1DA4",
+    "Cyclamen pink",
+    "cyclamen petals;bright pink ribbons;dyed silk;colored glass",
+    "The cyclamen on the sill"
+  ],
+  [
+    "Pink",
+    "#F53880",
+    "Opera pink",
+    "pink pigment;bright rose petals;stage silk;painted fans",
+    "The opera fan"
+  ],
+  [
+    "Pink",
+    "#FA29B4",
+    "Shocking pink",
+    "bright pink cloth;magenta ink;festival ribbons;pink enamel",
+    "The pink shop window"
+  ],
+  [
+    "Pink",
+    "#DC1864",
+    "Quinacridone rose",
+    "rose pigment;pink-red ink;rose petals;dyed linen",
+    "The rose-colored canvas"
+  ],
+  [
+    "Pink",
+    "#E1198E",
+    "Dragonfruit",
+    "dragonfruit skins;magenta fruit juice;pink glaze;bright pulp",
+    "The fruit market"
+  ],
+  [
+    "Pink",
+    "#F91062",
+    "Neon rose",
+    "rose-colored lights;pink lacquer;bright satin;red-pink glass",
+    "The neon-lit doorway"
+  ],
+  [
+    "Pink",
+    "#CB1061",
+    "Cerise",
+    "cerise cloth;cherry juice;bright embroidery;berry-colored silk",
+    "The cerise scarf"
+  ],
+  [
+    "Pink",
+    "#E44469",
+    "Pink tourmaline",
+    "pink tourmaline;rose glass;polished gemstones;bright crystal facets",
+    "The tourmaline pendant"
+  ],
+  [
+    "Neutral",
+    "#798196",
+    "Blue ash",
+    "cool ash;blue-gray stone;dull steel;gray wool",
+    "The cold fireplace"
+  ],
+  [
+    "Neutral",
+    "#5A7262",
+    "Green flint",
+    "green-gray flint;weathered stone;gray-green cloth;dull glass",
+    "The flint on the path"
+  ],
+  [
+    "Neutral",
+    "#7B606B",
+    "Rose graphite",
+    "rose-gray stone;muted pink wool;dusky plaster;soft graphite",
+    "The gray drawing room"
+  ],
+  [
+    "Neutral",
+    "#6A5E78",
+    "Violet concrete",
+    "violet-gray concrete;shadowed stone;dusky wool;gray-purple plaster",
+    "The concrete stairwell"
+  ],
+  [
+    "Red",
+    "#A50918",
+    "Deep signal red",
+    "signal lamps;red enamel;fresh cherries;painted buoys",
+    "A shadow over the warning lamp"
+  ],
+  [
+    "Red",
+    "#B81405",
+    "Deep flare red",
+    "road flares;festival cloth;red peppers;hot embers",
+    "A shadow over the roadside flare"
+  ],
+  [
+    "Red",
+    "#962008",
+    "Deep coquelicot",
+    "poppy petals;red-orange silk;painted masks;bright lacquer",
+    "A shadow over the field of poppies"
+  ],
+  [
+    "Red",
+    "#84110B",
+    "Deep cadmium red",
+    "artist's pigment;red paint tubes;vermilion cloth;glazed pottery",
+    "A shadow over the open paint box"
+  ],
+  [
+    "Red",
+    "#A00D37",
+    "Deep cardinal red",
+    "cardinal feathers;ceremonial robes;red ribbons;berry skins",
+    "A shadow over the bird at the window"
+  ],
+  [
+    "Red",
+    "#770316",
+    "Deep cherry lacquer",
+    "lacquered boxes;cherry skins;red glass;polished beads",
+    "A shadow over the lacquer box"
+  ],
+  [
+    "Rust",
+    "#AA3613",
+    "Deep cinnabar earth",
+    "mineral dust;red sandstone;iron-rich clay;earthen bowls",
+    "A shadow over the mineral seam"
+  ],
+  [
+    "Rust",
+    "#963A08",
+    "Deep burnt copper",
+    "copper filings;heated metal;orange-brown glaze;firelit stone",
+    "A shadow over the copper workshop"
+  ],
+  [
+    "Rust",
+    "#842F0B",
+    "Deep mars orange",
+    "earth pigment;orange clay;brick powder;warm plaster",
+    "A shadow over the painter's courtyard"
+  ],
+  [
+    "Orange",
+    "#AD5A00",
+    "Deep flame orange",
+    "flame tips;orange safety cloth;fresh peel;signal flags",
+    "A shadow over the flame in the kiln"
+  ],
+  [
+    "Orange",
+    "#DB5E06",
+    "Deep kumquat",
+    "kumquat skins;citrus sweets;orange enamel;bright paper",
+    "A shadow over the kumquat stall"
+  ],
+  [
+    "Orange",
+    "#5E1F08",
+    "Deep nasturtium",
+    "nasturtium petals;orange silk;spiced oil;glazed terracotta",
+    "A shadow over the garden gate"
+  ],
+  [
+    "Orange",
+    "#9E6400",
+    "Deep calendula",
+    "calendula petals;orange dye;golden peel;woven garlands",
+    "A shadow over the garland maker"
+  ],
+  [
+    "Orange",
+    "#884707",
+    "Deep papaya",
+    "papaya flesh;orange sorbet;fruit juice;sunlit glass",
+    "A shadow over the fruit seller"
+  ],
+  [
+    "Orange",
+    "#B39409",
+    "Deep amber resin",
+    "amber resin;pine sap;orange glass;varnished wood",
+    "A shadow over the resin pendant"
+  ],
+  [
+    "Orange",
+    "#DB3006",
+    "Deep tiger lily",
+    "lily petals;orange cloth;butterfly wings;bright glaze",
+    "A shadow over the lily beside the fence"
+  ],
+  [
+    "Orange",
+    "#711E09",
+    "Deep fire opal",
+    "fire opal;red-orange glass;glowing coals;polished stone",
+    "A shadow over the stone in the jeweler's tray"
+  ],
+  [
+    "Gold",
+    "#ADA200",
+    "Deep lemon yellow",
+    "lemon peel;yellow ink;citrus sweets;bright glazed tiles",
+    "A shadow over the lemon grove"
+  ],
+  [
+    "Gold",
+    "#8F8800",
+    "Deep canary yellow",
+    "canary feathers;yellow ribbons;painted shutters;bright cotton",
+    "A shadow over the birdcage"
+  ],
+  [
+    "Gold",
+    "#909A04",
+    "Deep sulfur yellow",
+    "sulfur crystals;yellow mineral powder;acid-yellow glass;lichen edges",
+    "A shadow over the mineral cabinet"
+  ],
+  [
+    "Gold",
+    "#8B7B04",
+    "Deep chrome yellow",
+    "chrome-yellow pigment;yellow enamel;painted machinery;bright signs",
+    "A shadow over the yellow sign"
+  ],
+  [
+    "Gold",
+    "#776803",
+    "Deep cadmium yellow",
+    "paint tubes;yellow canvas;golden petals;bright lacquer",
+    "A shadow over the painter's easel"
+  ],
+  [
+    "Gold",
+    "#BDB70F",
+    "Deep broom blossom",
+    "broom flowers;yellow silk;pollen dust;spring garlands",
+    "A shadow over the lane beside the hedge"
+  ],
+  [
+    "Gold",
+    "#E9A60C",
+    "Deep citrine",
+    "citrine facets;yellow glass;golden resin;polished beads",
+    "A shadow over the gemstone tray"
+  ],
+  [
+    "Gold",
+    "#665E00",
+    "Deep buttercup",
+    "buttercup petals;yellow satin;sunlit pollen;glazed bowls",
+    "A shadow over the meadow path"
+  ],
+  [
+    "Gold",
+    "#CCCC00",
+    "Deep forsythia",
+    "forsythia branches;yellow paper;spring petals;bright woven cloth",
+    "A shadow over the first flowering branch"
+  ],
+  [
+    "Yellow green",
+    "#699608",
+    "Deep electric lime",
+    "lime-colored ink;bright green glass;fresh zest;festival paper",
+    "A shadow over the lime-colored sign"
+  ],
+  [
+    "Yellow green",
+    "#64AF0E",
+    "Deep apple green",
+    "green apple skins;young vine leaves;green enamel;fruit candy",
+    "A shadow over the orchard basket"
+  ],
+  [
+    "Yellow green",
+    "#93AD00",
+    "Deep acid yellow",
+    "acid-yellow pigment;yellow-green glass;citrus candy;bright lichen",
+    "A shadow over the unexpected stain"
+  ],
+  [
+    "Yellow green",
+    "#478E10",
+    "Deep kiwi green",
+    "kiwi flesh;green fruit juice;fresh leaves;glazed beads",
+    "A shadow over the fruit on the cutting board"
+  ],
+  [
+    "Yellow green",
+    "#7ABD0F",
+    "Deep lime sherbet",
+    "lime sherbet;green candy;fresh citrus pulp;bright ceramics",
+    "A shadow over the ice-cream counter"
+  ],
+  [
+    "Yellow green",
+    "#6F8A14",
+    "Deep gooseberry",
+    "gooseberry skins;green-gold glass;young seeds;leaf veins",
+    "A shadow over the gooseberry patch"
+  ],
+  [
+    "Yellow green",
+    "#35840B",
+    "Deep lettuce green",
+    "lettuce leaves;green cotton;garden shoots;vegetable skins",
+    "A shadow over the kitchen garden bed"
+  ],
+  [
+    "Yellow green",
+    "#52BD00",
+    "Deep parrot lime",
+    "parrot feathers;bright leaf edges;green ribbons;painted toys",
+    "A shadow over the aviary door"
+  ],
+  [
+    "Green",
+    "#127D32",
+    "Deep kelly green",
+    "green sports cloth;fresh clover;painted gates;bright enamel",
+    "A shadow over the green jersey"
+  ],
+  [
+    "Green",
+    "#39721D",
+    "Deep grass green",
+    "fresh grass;leaf blades;green paint;cut stems",
+    "A shadow over the freshly mown field"
+  ],
+  [
+    "Green",
+    "#05B876",
+    "Deep emerald",
+    "emerald facets;green glass;silk ribbons;polished enamel",
+    "A shadow over the emerald clasp"
+  ],
+  [
+    "Green",
+    "#09A580",
+    "Deep viridian",
+    "viridian paint;green ceramic glaze;deep green glass;wet leaves",
+    "A shadow over the studio sink"
+  ],
+  [
+    "Green",
+    "#05B817",
+    "Deep chromium green",
+    "green pigment;painted metal;leaf shadows;glazed pottery",
+    "A shadow over the pigment shelf"
+  ],
+  [
+    "Green",
+    "#0AC257",
+    "Deep spring green",
+    "spring shoots;green silk;bright garden leaves;backlit glass",
+    "A shadow over the first new shoot"
+  ],
+  [
+    "Green",
+    "#127D50",
+    "Deep beryl green",
+    "beryl crystals;green crystal glass;fresh stems;translucent beads",
+    "A shadow over the crystal collection"
+  ],
+  [
+    "Green",
+    "#11D070",
+    "Deep jungle green",
+    "tropical leaves;wet vines;deep green enamel;fern fronds",
+    "A shadow over the jungle footbridge"
+  ],
+  [
+    "Green",
+    "#085E19",
+    "Deep shamrock",
+    "shamrock leaves;green ribbons;fresh parsley;painted wood",
+    "A shadow over the clover beneath the step"
+  ],
+  [
+    "Green",
+    "#00CC47",
+    "Deep billiard green",
+    "billiard cloth;green felt;emerald wool;dark glazed tiles",
+    "A shadow over the empty billiard room"
+  ],
+  [
+    "Teal",
+    "#06DBC2",
+    "Deep electric aqua",
+    "aqua ink;bright pool reflections;blue-green glass;glossy tiles",
+    "A shadow over the illuminated pool"
+  ],
+  [
+    "Teal",
+    "#06DBA9",
+    "Deep persian green",
+    "green-blue tiles;glazed ceramics;woven silk;polished beads",
+    "A shadow over the tiled archway"
+  ],
+  [
+    "Teal",
+    "#0C8E92",
+    "Deep caribbean teal",
+    "clear lagoon water;teal enamel;blue-green beads;painted boats",
+    "A shadow over the island jetty"
+  ],
+  [
+    "Teal",
+    "#16CAAC",
+    "Deep peacock green",
+    "peacock feather eyes;green silk;iridescent beetle wings;glazed beads",
+    "A shadow over the peacock in the courtyard"
+  ],
+  [
+    "Teal",
+    "#13AA98",
+    "Deep amazonite",
+    "amazonite stone;blue-green enamel;bright mineral seams;polished cabochons",
+    "A shadow over the stone cutter's bench"
+  ],
+  [
+    "Teal",
+    "#05C0C7",
+    "Deep chrysocolla",
+    "chrysocolla veins;blue-green mineral dust;ceramic glaze;colored glass",
+    "A shadow over the mineral stall"
+  ],
+  [
+    "Teal",
+    "#00F59B",
+    "Deep mint enamel",
+    "mint enamel;bright candy;glossy green glaze;sunlit bottle glass",
+    "A shadow over the painted mint tin"
+  ],
+  [
+    "Cyan",
+    "#007CAD",
+    "Deep cyan ink",
+    "cyan printing ink;bright blue glass;pool tiles;painted signs",
+    "A shadow over the printing press"
+  ],
+  [
+    "Cyan",
+    "#096971",
+    "Deep electric turquoise",
+    "turquoise enamel;bright lagoon water;blue-green silk;colored beads",
+    "A shadow over the lit aquarium"
+  ],
+  [
+    "Cyan",
+    "#006C9E",
+    "Deep pacific cyan",
+    "clear sea water;blue glass;bright tiles;painted shutters",
+    "A shadow over the open sea crossing"
+  ],
+  [
+    "Cyan",
+    "#0986A5",
+    "Deep aqua enamel",
+    "aqua enamel;glazed bowls;bright pool liners;blue-green glass",
+    "A shadow over the enamel pitcher"
+  ],
+  [
+    "Cyan",
+    "#0B5684",
+    "Deep blue zircon",
+    "zircon facets;blue gemstones;crystal glass;polished enamel",
+    "A shadow over the zircon ring"
+  ],
+  [
+    "Cyan",
+    "#0F86BD",
+    "Deep capri blue",
+    "blue grotto water;cyan silk;sunlit sea;bright blue tiles",
+    "A shadow over the grotto entrance"
+  ],
+  [
+    "Cyan",
+    "#00CAE0",
+    "Deep swimming-pool blue",
+    "pool water;blue plastic;bright aqua glaze;sunlit glass",
+    "A shadow over the swimming lane"
+  ],
+  [
+    "Blue",
+    "#163B98",
+    "Deep cobalt",
+    "cobalt pigment;blue glass;painted porcelain;deep blue silk",
+    "A shadow over the cobalt jar"
+  ],
+  [
+    "Blue",
+    "#26247B",
+    "Deep ultramarine",
+    "ultramarine paint;lapis dust;blue cloth;mineral pigment",
+    "A shadow over the lapis workshop"
+  ],
+  [
+    "Blue",
+    "#4329A3",
+    "Deep indigo",
+    "indigo dye;blue-violet cloth;ink washes;dyed yarn",
+    "A shadow over the indigo vat"
+  ],
+  [
+    "Blue",
+    "#040FA9",
+    "Deep klein blue",
+    "intense blue pigment;matte blue paint;blue canvas;dyed paper",
+    "A shadow over the blue canvas"
+  ],
+  [
+    "Blue",
+    "#094FA5",
+    "Deep egyptian blue",
+    "blue frit;painted stone;blue faience;mineral powder",
+    "A shadow over the painted tomb wall"
+  ],
+  [
+    "Blue",
+    "#082296",
+    "Deep international blue",
+    "blue flags;painted signs;blue ribbons;bright enamel",
+    "A shadow over the flag above the station"
+  ],
+  [
+    "Blue",
+    "#10498E",
+    "Deep king's blue",
+    "blue silk;painted china;blue glass;ceremonial cloth",
+    "A shadow over the royal-blue curtain"
+  ],
+  [
+    "Blue",
+    "#183086",
+    "Deep smalt",
+    "smalt glass;ground blue pigment;glazed beads;blue tiles",
+    "A shadow over the glassmaker's furnace"
+  ],
+  [
+    "Blue",
+    "#092371",
+    "Deep lapis lazuli",
+    "lapis stone;blue cabochons;mineral veins;painted amulets",
+    "A shadow over the stone in the pouch"
+  ],
+  [
+    "Blue",
+    "#0068BD",
+    "Deep electric blue",
+    "electric-blue ink;bright signs;blue lights;glossy enamel",
+    "A shadow over the glowing blue sign"
+  ],
+  [
+    "Violet",
+    "#4F108E",
+    "Deep electric violet",
+    "violet light;bright purple ink;dyed silk;colored glass",
+    "A shadow over the violet-lit window"
+  ],
+  [
+    "Violet",
+    "#720DA0",
+    "Deep dioxazine violet",
+    "violet paint;purple pigment;dark petals;ink stains",
+    "A shadow over the violet paint tube"
+  ],
+  [
+    "Violet",
+    "#2D0DA0",
+    "Deep gentian",
+    "gentian petals;blue-violet glass;bright dye;silk ribbons",
+    "A shadow over the mountain flower"
+  ],
+  [
+    "Violet",
+    "#3E127D",
+    "Deep pansy violet",
+    "pansy petals;purple cloth;violet glaze;painted beads",
+    "A shadow over the pot of pansies"
+  ],
+  [
+    "Violet",
+    "#24148A",
+    "Deep campanula",
+    "bellflower petals;violet-blue ink;bright ribbons;glazed ceramic",
+    "A shadow over the bellflowers by the wall"
+  ],
+  [
+    "Violet",
+    "#8205B8",
+    "Deep spectrum violet",
+    "violet pigment;purple light;dyed paper;bright enamel",
+    "A shadow over the prism on the desk"
+  ],
+  [
+    "Violet",
+    "#4209B3",
+    "Deep fluorite violet",
+    "fluorite crystals;purple mineral veins;translucent beads;colored glass",
+    "A shadow over the fluorite specimen"
+  ],
+  [
+    "Violet",
+    "#5409A5",
+    "Deep aniline violet",
+    "aniline dye;violet silk;purple ink;stained cotton",
+    "A shadow over the dye maker's table"
+  ],
+  [
+    "Purple",
+    "#AA1398",
+    "Deep tyrian purple",
+    "purple-dyed wool;dark silk;berry stains;ceremonial cloth",
+    "A shadow over the purple robe"
+  ],
+  [
+    "Purple",
+    "#880DA0",
+    "Deep royal purple",
+    "purple velvet;bright brocade;colored glass;dyed ribbons",
+    "A shadow over the ceremonial room"
+  ],
+  [
+    "Purple",
+    "#9E04A9",
+    "Deep electric purple",
+    "purple ink;bright lights;dyed silk;glossy enamel",
+    "A shadow over the purple neon sign"
+  ],
+  [
+    "Purple",
+    "#7D127B",
+    "Deep cattleya",
+    "orchid petals;purple silk;floral ribbons;colored beads",
+    "A shadow over the orchid display"
+  ],
+  [
+    "Purple",
+    "#8E1068",
+    "Deep byzantium",
+    "purple-red silk;dark berry juice;dyed wool;embroidered cloth",
+    "A shadow over the embroidered cloak"
+  ],
+  [
+    "Purple",
+    "#660E81",
+    "Deep petunia purple",
+    "petunia petals;bright fabric;purple glaze;flower dye",
+    "A shadow over the hanging flower basket"
+  ],
+  [
+    "Purple",
+    "#C20AA0",
+    "Deep phlox purple",
+    "phlox flowers;purple-pink silk;bright ribbons;dyed paper",
+    "A shadow over the phlox border"
+  ],
+  [
+    "Purple",
+    "#7C008F",
+    "Deep purple enamel",
+    "purple enamel;painted jewelry;bright ceramic glaze;glass ornaments",
+    "A shadow over the enameled brooch"
+  ],
+  [
+    "Pink",
+    "#86277B",
+    "Deep fuchsia",
+    "fuchsia flowers;bright magenta silk;berry dye;pink-purple glass",
+    "A shadow over the fuchsia basket"
+  ],
+  [
+    "Pink",
+    "#A50959",
+    "Deep hot pink",
+    "hot-pink ink;bright satin;festival paper;painted toys",
+    "A shadow over the pink festival banner"
+  ],
+  [
+    "Pink",
+    "#BD0F80",
+    "Deep cyclamen pink",
+    "cyclamen petals;bright pink ribbons;dyed silk;colored glass",
+    "A shadow over the cyclamen on the sill"
+  ],
+  [
+    "Pink",
+    "#B3094B",
+    "Deep opera pink",
+    "pink pigment;bright rose petals;stage silk;painted fans",
+    "A shadow over the opera fan"
+  ],
+  [
+    "Pink",
+    "#770358",
+    "Deep shocking pink",
+    "bright pink cloth;magenta ink;festival ribbons;pink enamel",
+    "A shadow over the pink shop window"
+  ],
+  [
+    "Pink",
+    "#810E2B",
+    "Deep quinacridone rose",
+    "rose pigment;pink-red ink;rose petals;dyed linen",
+    "A shadow over the rose-colored canvas"
+  ],
+  [
+    "Pink",
+    "#8E1051",
+    "Deep dragonfruit",
+    "dragonfruit skins;magenta fruit juice;pink glaze;bright pulp",
+    "A shadow over the fruit market"
+  ],
+  [
+    "Pink",
+    "#630324",
+    "Deep neon rose",
+    "rose-colored lights;pink lacquer;bright satin;red-pink glass",
+    "A shadow over the neon-lit doorway"
+  ],
+  [
+    "Pink",
+    "#71093D",
+    "Deep cerise",
+    "cerise cloth;cherry juice;bright embroidery;berry-colored silk",
+    "A shadow over the cerise scarf"
+  ],
+  [
+    "Pink",
+    "#590D14",
+    "Deep pink tourmaline",
+    "pink tourmaline;rose glass;polished gemstones;bright crystal facets",
+    "A shadow over the tourmaline pendant"
+  ],
+  [
+    "Neutral",
+    "#4C5561",
+    "Deep blue ash",
+    "cool ash;blue-gray stone;dull steel;gray wool",
+    "A shadow over the cold fireplace"
+  ],
+  [
+    "Neutral",
+    "#36453B",
+    "Deep green flint",
+    "green-gray flint;weathered stone;gray-green cloth;dull glass",
+    "A shadow over the flint on the path"
+  ],
+  [
+    "Neutral",
+    "#503F46",
+    "Deep rose graphite",
+    "rose-gray stone;muted pink wool;dusky plaster;soft graphite",
+    "A shadow over the gray drawing room"
+  ],
+  [
+    "Neutral",
+    "#413645",
+    "Deep violet concrete",
+    "violet-gray concrete;shadowed stone;dusky wool;gray-purple plaster",
+    "A shadow over the concrete stairwell"
+  ],
+  [
+    "Red",
+    "#FF475A",
+    "Luminous signal red",
+    "signal lamps;red enamel;fresh cherries;painted buoys",
+    "Light on the warning lamp"
+  ],
+  [
+    "Red",
+    "#FA5B4C",
+    "Luminous flare red",
+    "road flares;festival cloth;red peppers;hot embers",
+    "Light on the roadside flare"
+  ],
+  [
+    "Red",
+    "#F7785F",
+    "Luminous coquelicot",
+    "poppy petals;red-orange silk;painted masks;bright lacquer",
+    "Light on the field of poppies"
+  ],
+  [
+    "Red",
+    "#E86E5E",
+    "Luminous cadmium red",
+    "artist's pigment;red paint tubes;vermilion cloth;glazed pottery",
+    "Light on the open paint box"
+  ],
+  [
+    "Red",
+    "#F15581",
+    "Luminous cardinal red",
+    "cardinal feathers;ceremonial robes;red ribbons;berry skins",
+    "Light on the bird at the window"
+  ],
+  [
+    "Red",
+    "#F91A3F",
+    "Luminous cherry lacquer",
+    "lacquered boxes;cherry skins;red glass;polished beads",
+    "Light on the lacquer box"
+  ],
+  [
+    "Rust",
+    "#ED865A",
+    "Luminous cinnabar earth",
+    "mineral dust;red sandstone;iron-rich clay;earthen bowls",
+    "Light on the mineral seam"
+  ],
+  [
+    "Rust",
+    "#D79A60",
+    "Luminous burnt copper",
+    "copper filings;heated metal;orange-brown glaze;firelit stone",
+    "Light on the copper workshop"
+  ],
+  [
+    "Rust",
+    "#FCA47E",
+    "Luminous mars orange",
+    "earth pigment;orange clay;brick powder;warm plaster",
+    "Light on the painter's courtyard"
+  ],
+  [
+    "Orange",
+    "#FFB957",
+    "Luminous flame orange",
+    "flame tips;orange safety cloth;fresh peel;signal flags",
+    "Light on the flame in the kiln"
+  ],
+  [
+    "Orange",
+    "#DF9620",
+    "Luminous kumquat",
+    "kumquat skins;citrus sweets;orange enamel;bright paper",
+    "Light on the kumquat stall"
+  ],
+  [
+    "Orange",
+    "#F59384",
+    "Luminous nasturtium",
+    "nasturtium petals;orange silk;spiced oil;glazed terracotta",
+    "Light on the garden gate"
+  ],
+  [
+    "Orange",
+    "#DFAB68",
+    "Luminous calendula",
+    "calendula petals;orange dye;golden peel;woven garlands",
+    "Light on the garland maker"
+  ],
+  [
+    "Orange",
+    "#FF7E47",
+    "Luminous papaya",
+    "papaya flesh;orange sorbet;fruit juice;sunlit glass",
+    "Light on the fruit seller"
+  ],
+  [
+    "Orange",
+    "#DDBD78",
+    "Luminous amber resin",
+    "amber resin;pine sap;orange glass;varnished wood",
+    "Light on the resin pendant"
+  ],
+  [
+    "Orange",
+    "#DA614E",
+    "Luminous tiger lily",
+    "lily petals;orange cloth;butterfly wings;bright glaze",
+    "Light on the lily beside the fence"
+  ],
+  [
+    "Orange",
+    "#FC7E7E",
+    "Luminous fire opal",
+    "fire opal;red-orange glass;glowing coals;polished stone",
+    "Light on the stone in the jeweler's tray"
+  ],
+  [
+    "Gold",
+    "#FFF566",
+    "Luminous lemon yellow",
+    "lemon peel;yellow ink;citrus sweets;bright glazed tiles",
+    "Light on the lemon grove"
+  ],
+  [
+    "Gold",
+    "#FFF98F",
+    "Luminous canary yellow",
+    "canary feathers;yellow ribbons;painted shutters;bright cotton",
+    "Light on the birdcage"
+  ],
+  [
+    "Gold",
+    "#E5FB5B",
+    "Luminous sulfur yellow",
+    "sulfur crystals;yellow mineral powder;acid-yellow glass;lichen edges",
+    "Light on the mineral cabinet"
+  ],
+  [
+    "Gold",
+    "#EAEC79",
+    "Luminous chrome yellow",
+    "chrome-yellow pigment;yellow enamel;painted machinery;bright signs",
+    "Light on the yellow sign"
+  ],
+  [
+    "Gold",
+    "#FFBB00",
+    "Luminous cadmium yellow",
+    "paint tubes;yellow canvas;golden petals;bright lacquer",
+    "Light on the painter's easel"
+  ],
+  [
+    "Gold",
+    "#CFC359",
+    "Luminous broom blossom",
+    "broom flowers;yellow silk;pollen dust;spring garlands",
+    "Light on the lane beside the hedge"
+  ],
+  [
+    "Gold",
+    "#D4D054",
+    "Luminous citrine",
+    "citrine facets;yellow glass;golden resin;polished beads",
+    "Light on the gemstone tray"
+  ],
+  [
+    "Gold",
+    "#EDE05A",
+    "Luminous buttercup",
+    "buttercup petals;yellow satin;sunlit pollen;glazed bowls",
+    "Light on the meadow path"
+  ],
+  [
+    "Gold",
+    "#D9ED5A",
+    "Luminous forsythia",
+    "forsythia branches;yellow paper;spring petals;bright woven cloth",
+    "Light on the first flowering branch"
+  ],
+  [
+    "Yellow green",
+    "#C1F651",
+    "Luminous electric lime",
+    "lime-colored ink;bright green glass;fresh zest;festival paper",
+    "Light on the lime-colored sign"
+  ],
+  [
+    "Yellow green",
+    "#94F155",
+    "Luminous apple green",
+    "green apple skins;young vine leaves;green enamel;fruit candy",
+    "Light on the orchard basket"
+  ],
+  [
+    "Yellow green",
+    "#B4FF29",
+    "Luminous acid yellow",
+    "acid-yellow pigment;yellow-green glass;citrus candy;bright lichen",
+    "Light on the unexpected stain"
+  ],
+  [
+    "Yellow green",
+    "#92E156",
+    "Luminous kiwi green",
+    "kiwi flesh;green fruit juice;fresh leaves;glazed beads",
+    "Light on the fruit on the cutting board"
+  ],
+  [
+    "Yellow green",
+    "#CAF584",
+    "Luminous lime sherbet",
+    "lime sherbet;green candy;fresh citrus pulp;bright ceramics",
+    "Light on the ice-cream counter"
+  ],
+  [
+    "Yellow green",
+    "#B2D63D",
+    "Luminous gooseberry",
+    "gooseberry skins;green-gold glass;young seeds;leaf veins",
+    "Light on the gooseberry patch"
+  ],
+  [
+    "Yellow green",
+    "#94D671",
+    "Luminous lettuce green",
+    "lettuce leaves;green cotton;garden shoots;vegetable skins",
+    "Light on the kitchen garden bed"
+  ],
+  [
+    "Yellow green",
+    "#9EFF66",
+    "Luminous parrot lime",
+    "parrot feathers;bright leaf edges;green ribbons;painted toys",
+    "Light on the aviary door"
+  ],
+  [
+    "Green",
+    "#6CEA92",
+    "Luminous kelly green",
+    "green sports cloth;fresh clover;painted gates;bright enamel",
+    "Light on the green jersey"
+  ],
+  [
+    "Green",
+    "#7ED454",
+    "Luminous grass green",
+    "fresh grass;leaf blades;green paint;cut stems",
+    "Light on the freshly mown field"
+  ],
+  [
+    "Green",
+    "#7EFCCD",
+    "Luminous emerald",
+    "emerald facets;green glass;silk ribbons;polished enamel",
+    "Light on the emerald clasp"
+  ],
+  [
+    "Green",
+    "#6CDAB9",
+    "Luminous viridian",
+    "viridian paint;green ceramic glaze;deep green glass;wet leaves",
+    "Light on the studio sink"
+  ],
+  [
+    "Green",
+    "#71F47E",
+    "Luminous chromium green",
+    "green pigment;painted metal;leaf shadows;glazed pottery",
+    "Light on the pigment shelf"
+  ],
+  [
+    "Green",
+    "#57FF9D",
+    "Luminous spring green",
+    "spring shoots;green silk;bright garden leaves;backlit glass",
+    "Light on the first new shoot"
+  ],
+  [
+    "Green",
+    "#68DFA5",
+    "Luminous beryl green",
+    "beryl crystals;green crystal glass;fresh stems;translucent beads",
+    "Light on the crystal collection"
+  ],
+  [
+    "Green",
+    "#8BEEBD",
+    "Luminous jungle green",
+    "tropical leaves;wet vines;deep green enamel;fern fronds",
+    "Light on the jungle footbridge"
+  ],
+  [
+    "Green",
+    "#51E66F",
+    "Luminous shamrock",
+    "shamrock leaves;green ribbons;fresh parsley;painted wood",
+    "Light on the clover beneath the step"
+  ],
+  [
+    "Green",
+    "#38FF7E",
+    "Luminous billiard green",
+    "billiard cloth;green felt;emerald wool;dark glazed tiles",
+    "Light on the empty billiard room"
+  ],
+  [
+    "Teal",
+    "#5BFBE8",
+    "Luminous electric aqua",
+    "aqua ink;bright pool reflections;blue-green glass;glossy tiles",
+    "Light on the illuminated pool"
+  ],
+  [
+    "Teal",
+    "#6CEACD",
+    "Luminous persian green",
+    "green-blue tiles;glazed ceramics;woven silk;polished beads",
+    "Light on the tiled archway"
+  ],
+  [
+    "Teal",
+    "#6CEAE6",
+    "Luminous caribbean teal",
+    "clear lagoon water;teal enamel;blue-green beads;painted boats",
+    "Light on the island jetty"
+  ],
+  [
+    "Teal",
+    "#9AF4D9",
+    "Luminous peacock green",
+    "peacock feather eyes;green silk;iridescent beetle wings;glazed beads",
+    "Light on the peacock in the courtyard"
+  ],
+  [
+    "Teal",
+    "#6CDAD5",
+    "Luminous amazonite",
+    "amazonite stone;blue-green enamel;bright mineral seams;polished cabochons",
+    "Light on the stone cutter's bench"
+  ],
+  [
+    "Teal",
+    "#3DF4FA",
+    "Luminous chrysocolla",
+    "chrysocolla veins;blue-green mineral dust;ceramic glaze;colored glass",
+    "Light on the mineral stall"
+  ],
+  [
+    "Teal",
+    "#7AFFB4",
+    "Luminous mint enamel",
+    "mint enamel;bright candy;glossy green glaze;sunlit bottle glass",
+    "Light on the painted mint tin"
+  ],
+  [
+    "Cyan",
+    "#66DEFF",
+    "Luminous cyan ink",
+    "cyan printing ink;bright blue glass;pool tiles;painted signs",
+    "Light on the printing press"
+  ],
+  [
+    "Cyan",
+    "#7EF1FC",
+    "Luminous electric turquoise",
+    "turquoise enamel;bright lagoon water;blue-green silk;colored beads",
+    "Light on the lit aquarium"
+  ],
+  [
+    "Cyan",
+    "#68C4EE",
+    "Luminous pacific cyan",
+    "clear sea water;blue glass;bright tiles;painted shutters",
+    "Light on the open sea crossing"
+  ],
+  [
+    "Cyan",
+    "#7AFFFF",
+    "Luminous aqua enamel",
+    "aqua enamel;glazed bowls;bright pool liners;blue-green glass",
+    "Light on the enamel pitcher"
+  ],
+  [
+    "Cyan",
+    "#47AFF0",
+    "Luminous blue zircon",
+    "zircon facets;blue gemstones;crystal glass;polished enamel",
+    "Light on the zircon ring"
+  ],
+  [
+    "Cyan",
+    "#92E2FC",
+    "Luminous capri blue",
+    "blue grotto water;cyan silk;sunlit sea;bright blue tiles",
+    "Light on the grotto entrance"
+  ],
+  [
+    "Cyan",
+    "#14A9FF",
+    "Luminous swimming-pool blue",
+    "pool water;blue plastic;bright aqua glaze;sunlit glass",
+    "Light on the swimming lane"
+  ],
+  [
+    "Blue",
+    "#5E85E8",
+    "Luminous cobalt",
+    "cobalt pigment;blue glass;painted porcelain;deep blue silk",
+    "Light on the cobalt jar"
+  ],
+  [
+    "Blue",
+    "#7471D6",
+    "Luminous ultramarine",
+    "ultramarine paint;lapis dust;blue cloth;mineral pigment",
+    "Light on the lapis workshop"
+  ],
+  [
+    "Blue",
+    "#7A60D7",
+    "Luminous indigo",
+    "indigo dye;blue-violet cloth;ink washes;dyed yarn",
+    "Light on the indigo vat"
+  ],
+  [
+    "Blue",
+    "#4C58FA",
+    "Luminous klein blue",
+    "intense blue pigment;matte blue paint;blue canvas;dyed paper",
+    "Light on the blue canvas"
+  ],
+  [
+    "Blue",
+    "#5F99F7",
+    "Luminous egyptian blue",
+    "blue frit;painted stone;blue faience;mineral powder",
+    "Light on the painted tomb wall"
+  ],
+  [
+    "Blue",
+    "#516FF6",
+    "Luminous international blue",
+    "blue flags;painted signs;blue ribbons;bright enamel",
+    "Light on the flag above the station"
+  ],
+  [
+    "Blue",
+    "#75B5F0",
+    "Luminous king's blue",
+    "blue silk;painted china;blue glass;ceremonial cloth",
+    "Light on the royal-blue curtain"
+  ],
+  [
+    "Blue",
+    "#495FDF",
+    "Luminous smalt",
+    "smalt glass;ground blue pigment;glazed beads;blue tiles",
+    "Light on the glassmaker's furnace"
+  ],
+  [
+    "Blue",
+    "#477DF0",
+    "Luminous lapis lazuli",
+    "lapis stone;blue cabochons;mineral veins;painted amulets",
+    "Light on the stone in the pouch"
+  ],
+  [
+    "Blue",
+    "#7ACCFF",
+    "Luminous electric blue",
+    "electric-blue ink;bright signs;blue lights;glossy enamel",
+    "Light on the glowing blue sign"
+  ],
+  [
+    "Violet",
+    "#A35AED",
+    "Luminous electric violet",
+    "violet light;bright purple ink;dyed silk;colored glass",
+    "Light on the violet-lit window"
+  ],
+  [
+    "Violet",
+    "#AF47F0",
+    "Luminous dioxazine violet",
+    "violet paint;purple pigment;dark petals;ink stains",
+    "Light on the violet paint tube"
+  ],
+  [
+    "Violet",
+    "#7755F1",
+    "Luminous gentian",
+    "gentian petals;blue-violet glass;bright dye;silk ribbons",
+    "Light on the mountain flower"
+  ],
+  [
+    "Violet",
+    "#8F51E6",
+    "Luminous pansy violet",
+    "pansy petals;purple cloth;violet glaze;painted beads",
+    "Light on the pot of pansies"
+  ],
+  [
+    "Violet",
+    "#6551E6",
+    "Luminous campanula",
+    "bellflower petals;violet-blue ink;bright ribbons;glazed ceramic",
+    "Light on the bellflowers by the wall"
+  ],
+  [
+    "Violet",
+    "#CB5BFB",
+    "Luminous spectrum violet",
+    "violet pigment;purple light;dyed paper;bright enamel",
+    "Light on the prism on the desk"
+  ],
+  [
+    "Violet",
+    "#9468EE",
+    "Luminous fluorite violet",
+    "fluorite crystals;purple mineral veins;translucent beads;colored glass",
+    "Light on the fluorite specimen"
+  ],
+  [
+    "Violet",
+    "#9E34F4",
+    "Luminous aniline violet",
+    "aniline dye;violet silk;purple ink;stained cotton",
+    "Light on the dye maker's table"
+  ],
+  [
+    "Purple",
+    "#ED5ADC",
+    "Luminous tyrian purple",
+    "purple-dyed wool;dark silk;berry stains;ceremonial cloth",
+    "Light on the purple robe"
+  ],
+  [
+    "Purple",
+    "#DB63F2",
+    "Luminous royal purple",
+    "purple velvet;bright brocade;colored glass;dyed ribbons",
+    "Light on the ceremonial room"
+  ],
+  [
+    "Purple",
+    "#EF4CFA",
+    "Luminous electric purple",
+    "purple ink;bright lights;dyed silk;glossy enamel",
+    "Light on the purple neon sign"
+  ],
+  [
+    "Purple",
+    "#EC79EA",
+    "Luminous cattleya",
+    "orchid petals;purple silk;floral ribbons;colored beads",
+    "Light on the orchid display"
+  ],
+  [
+    "Purple",
+    "#ED5AC1",
+    "Luminous byzantium",
+    "purple-red silk;dark berry juice;dyed wool;embroidered cloth",
+    "Light on the embroidered cloak"
+  ],
+  [
+    "Purple",
+    "#C563E3",
+    "Luminous petunia purple",
+    "petunia petals;bright fabric;purple glaze;flower dye",
+    "Light on the hanging flower basket"
+  ],
+  [
+    "Purple",
+    "#FF47DD",
+    "Luminous phlox purple",
+    "phlox flowers;purple-pink silk;bright ribbons;dyed paper",
+    "Light on the phlox border"
+  ],
+  [
+    "Purple",
+    "#DA47FF",
+    "Luminous purple enamel",
+    "purple enamel;painted jewelry;bright ceramic glaze;glass ornaments",
+    "Light on the enameled brooch"
+  ],
+  [
+    "Pink",
+    "#DF68D1",
+    "Luminous fuchsia",
+    "fuchsia flowers;bright magenta silk;berry dye;pink-purple glass",
+    "Light on the fuchsia basket"
+  ],
+  [
+    "Pink",
+    "#F651A6",
+    "Luminous hot pink",
+    "hot-pink ink;bright satin;festival paper;painted toys",
+    "Light on the pink festival banner"
+  ],
+  [
+    "Pink",
+    "#F471C6",
+    "Luminous cyclamen pink",
+    "cyclamen petals;bright pink ribbons;dyed silk;colored glass",
+    "Light on the cyclamen on the sill"
+  ],
+  [
+    "Pink",
+    "#F75F99",
+    "Luminous opera pink",
+    "pink pigment;bright rose petals;stage silk;painted fans",
+    "Light on the opera fan"
+  ],
+  [
+    "Pink",
+    "#FF47C2",
+    "Luminous shocking pink",
+    "bright pink cloth;magenta ink;festival ribbons;pink enamel",
+    "Light on the pink shop window"
+  ],
+  [
+    "Pink",
+    "#F07594",
+    "Luminous quinacridone rose",
+    "rose pigment;pink-red ink;rose petals;dyed linen",
+    "Light on the rose-colored canvas"
+  ],
+  [
+    "Pink",
+    "#E363AE",
+    "Luminous dragonfruit",
+    "dragonfruit skins;magenta fruit juice;pink glaze;bright pulp",
+    "Light on the fruit market"
+  ],
+  [
+    "Pink",
+    "#FC7EAA",
+    "Luminous neon rose",
+    "rose-colored lights;pink lacquer;bright satin;red-pink glass",
+    "Light on the neon-lit doorway"
+  ],
+  [
+    "Pink",
+    "#D6719C",
+    "Luminous cerise",
+    "cerise cloth;cherry juice;bright embroidery;berry-colored silk",
+    "Light on the cerise scarf"
+  ],
+  [
+    "Pink",
+    "#D67182",
+    "Luminous pink tourmaline",
+    "pink tourmaline;rose glass;polished gemstones;bright crystal facets",
+    "Light on the tourmaline pendant"
+  ],
+  [
+    "Neutral",
+    "#A9B3BC",
+    "Luminous blue ash",
+    "cool ash;blue-gray stone;dull steel;gray wool",
+    "Light on the cold fireplace"
+  ],
+  [
+    "Neutral",
+    "#7D827F",
+    "Luminous green flint",
+    "green-gray flint;weathered stone;gray-green cloth;dull glass",
+    "Light on the flint on the path"
+  ],
+  [
+    "Neutral",
+    "#A18792",
+    "Luminous rose graphite",
+    "rose-gray stone;muted pink wool;dusky plaster;soft graphite",
+    "Light on the gray drawing room"
+  ],
+  [
+    "Neutral",
+    "#907C98",
+    "Luminous violet concrete",
+    "violet-gray concrete;shadowed stone;dusky wool;gray-purple plaster",
+    "Light on the concrete stairwell"
+  ],
+  [
+    "Red",
+    "#F98B9D",
+    "Pale signal red",
+    "signal lamps;red enamel;fresh cherries;painted buoys",
+    "The memory of the warning lamp"
+  ],
+  [
+    "Red",
+    "#FFB4B3",
+    "Pale flare red",
+    "road flares;festival cloth;red peppers;hot embers",
+    "The memory of the roadside flare"
+  ],
+  [
+    "Red",
+    "#FFB494",
+    "Pale coquelicot",
+    "poppy petals;red-orange silk;painted masks;bright lacquer",
+    "The memory of the field of poppies"
+  ],
+  [
+    "Red",
+    "#FCA297",
+    "Pale cadmium red",
+    "artist's pigment;red paint tubes;vermilion cloth;glazed pottery",
+    "The memory of the open paint box"
+  ],
+  [
+    "Red",
+    "#F8AAC5",
+    "Pale cardinal red",
+    "cardinal feathers;ceremonial robes;red ribbons;berry skins",
+    "The memory of the bird at the window"
+  ],
+  [
+    "Red",
+    "#FF617B",
+    "Pale cherry lacquer",
+    "lacquered boxes;cherry skins;red glass;polished beads",
+    "The memory of the lacquer box"
+  ],
+  [
+    "Rust",
+    "#E47C67",
+    "Pale cinnabar earth",
+    "mineral dust;red sandstone;iron-rich clay;earthen bowls",
+    "The memory of the mineral seam"
+  ],
+  [
+    "Rust",
+    "#D2A479",
+    "Pale burnt copper",
+    "copper filings;heated metal;orange-brown glaze;firelit stone",
+    "The memory of the copper workshop"
+  ],
+  [
+    "Rust",
+    "#EB8875",
+    "Pale mars orange",
+    "earth pigment;orange clay;brick powder;warm plaster",
+    "The memory of the painter's courtyard"
+  ],
+  [
+    "Orange",
+    "#FFC675",
+    "Pale flame orange",
+    "flame tips;orange safety cloth;fresh peel;signal flags",
+    "The memory of the flame in the kiln"
+  ],
+  [
+    "Orange",
+    "#F0D394",
+    "Pale kumquat",
+    "kumquat skins;citrus sweets;orange enamel;bright paper",
+    "The memory of the kumquat stall"
+  ],
+  [
+    "Orange",
+    "#EB9475",
+    "Pale nasturtium",
+    "nasturtium petals;orange silk;spiced oil;glazed terracotta",
+    "The memory of the garden gate"
+  ],
+  [
+    "Orange",
+    "#FFD7A3",
+    "Pale calendula",
+    "calendula petals;orange dye;golden peel;woven garlands",
+    "The memory of the garland maker"
+  ],
+  [
+    "Orange",
+    "#E3BA91",
+    "Pale papaya",
+    "papaya flesh;orange sorbet;fruit juice;sunlit glass",
+    "The memory of the fruit seller"
+  ],
+  [
+    "Orange",
+    "#FFE985",
+    "Pale amber resin",
+    "amber resin;pine sap;orange glass;varnished wood",
+    "The memory of the resin pendant"
+  ],
+  [
+    "Orange",
+    "#FF8875",
+    "Pale tiger lily",
+    "lily petals;orange cloth;butterfly wings;bright glaze",
+    "The memory of the lily beside the fence"
+  ],
+  [
+    "Orange",
+    "#FF6B61",
+    "Pale fire opal",
+    "fire opal;red-orange glass;glowing coals;polished stone",
+    "The memory of the stone in the jeweler's tray"
+  ],
+  [
+    "Gold",
+    "#FFFAB3",
+    "Pale lemon yellow",
+    "lemon peel;yellow ink;citrus sweets;bright glazed tiles",
+    "The memory of the lemon grove"
+  ],
+  [
+    "Gold",
+    "#EDF49F",
+    "Pale canary yellow",
+    "canary feathers;yellow ribbons;painted shutters;bright cotton",
+    "The memory of the birdcage"
+  ],
+  [
+    "Gold",
+    "#E5FC88",
+    "Pale sulfur yellow",
+    "sulfur crystals;yellow mineral powder;acid-yellow glass;lichen edges",
+    "The memory of the mineral cabinet"
+  ],
+  [
+    "Gold",
+    "#FFEEA3",
+    "Pale chrome yellow",
+    "chrome-yellow pigment;yellow enamel;painted machinery;bright signs",
+    "The memory of the yellow sign"
+  ],
+  [
+    "Gold",
+    "#FEFECD",
+    "Pale cadmium yellow",
+    "paint tubes;yellow canvas;golden petals;bright lacquer",
+    "The memory of the painter's easel"
+  ],
+  [
+    "Gold",
+    "#E7E48D",
+    "Pale broom blossom",
+    "broom flowers;yellow silk;pollen dust;spring garlands",
+    "The memory of the lane beside the hedge"
+  ],
+  [
+    "Gold",
+    "#DBD870",
+    "Pale citrine",
+    "citrine facets;yellow glass;golden resin;polished beads",
+    "The memory of the gemstone tray"
+  ],
+  [
+    "Gold",
+    "#FFD84D",
+    "Pale buttercup",
+    "buttercup petals;yellow satin;sunlit pollen;glazed bowls",
+    "The memory of the meadow path"
+  ],
+  [
+    "Gold",
+    "#EBF7BA",
+    "Pale forsythia",
+    "forsythia branches;yellow paper;spring petals;bright woven cloth",
+    "The memory of the first flowering branch"
+  ],
+  [
+    "Yellow green",
+    "#D0FAA8",
+    "Pale electric lime",
+    "lime-colored ink;bright green glass;fresh zest;festival paper",
+    "The memory of the lime-colored sign"
+  ],
+  [
+    "Yellow green",
+    "#BFEA9A",
+    "Pale apple green",
+    "green apple skins;young vine leaves;green enamel;fruit candy",
+    "The memory of the orchard basket"
+  ],
+  [
+    "Yellow green",
+    "#CFFF75",
+    "Pale acid yellow",
+    "acid-yellow pigment;yellow-green glass;citrus candy;bright lichen",
+    "The memory of the unexpected stain"
+  ],
+  [
+    "Yellow green",
+    "#ABF183",
+    "Pale kiwi green",
+    "kiwi flesh;green fruit juice;fresh leaves;glazed beads",
+    "The memory of the fruit on the cutting board"
+  ],
+  [
+    "Yellow green",
+    "#AEE37D",
+    "Pale lime sherbet",
+    "lime sherbet;green candy;fresh citrus pulp;bright ceramics",
+    "The memory of the ice-cream counter"
+  ],
+  [
+    "Yellow green",
+    "#BED99B",
+    "Pale gooseberry",
+    "gooseberry skins;green-gold glass;young seeds;leaf veins",
+    "The memory of the gooseberry patch"
+  ],
+  [
+    "Yellow green",
+    "#D0FEC8",
+    "Pale lettuce green",
+    "lettuce leaves;green cotton;garden shoots;vegetable skins",
+    "The memory of the kitchen garden bed"
+  ],
+  [
+    "Yellow green",
+    "#B1FF85",
+    "Pale parrot lime",
+    "parrot feathers;bright leaf edges;green ribbons;painted toys",
+    "The memory of the aviary door"
+  ],
+  [
+    "Green",
+    "#BCF5CD",
+    "Pale kelly green",
+    "green sports cloth;fresh clover;painted gates;bright enamel",
+    "The memory of the green jersey"
+  ],
+  [
+    "Green",
+    "#A8D788",
+    "Pale grass green",
+    "fresh grass;leaf blades;green paint;cut stems",
+    "The memory of the freshly mown field"
+  ],
+  [
+    "Green",
+    "#C8FEE7",
+    "Pale emerald",
+    "emerald facets;green glass;silk ribbons;polished enamel",
+    "The memory of the emerald clasp"
+  ],
+  [
+    "Green",
+    "#A3FFF0",
+    "Pale viridian",
+    "viridian paint;green ceramic glaze;deep green glass;wet leaves",
+    "The memory of the studio sink"
+  ],
+  [
+    "Green",
+    "#AAF8B2",
+    "Pale chromium green",
+    "green pigment;painted metal;leaf shadows;glazed pottery",
+    "The memory of the pigment shelf"
+  ],
+  [
+    "Green",
+    "#A3FFD0",
+    "Pale spring green",
+    "spring shoots;green silk;bright garden leaves;backlit glass",
+    "The memory of the first new shoot"
+  ],
+  [
+    "Green",
+    "#94E0B6",
+    "Pale beryl green",
+    "beryl crystals;green crystal glass;fresh stems;translucent beads",
+    "The memory of the crystal collection"
+  ],
+  [
+    "Green",
+    "#87EEA5",
+    "Pale jungle green",
+    "tropical leaves;wet vines;deep green enamel;fern fronds",
+    "The memory of the jungle footbridge"
+  ],
+  [
+    "Green",
+    "#75D788",
+    "Pale shamrock",
+    "shamrock leaves;green ribbons;fresh parsley;painted wood",
+    "The memory of the clover beneath the step"
+  ],
+  [
+    "Green",
+    "#A9EABC",
+    "Pale billiard green",
+    "billiard cloth;green felt;emerald wool;dark glazed tiles",
+    "The memory of the empty billiard room"
+  ],
+  [
+    "Teal",
+    "#9AEAE6",
+    "Pale electric aqua",
+    "aqua ink;bright pool reflections;blue-green glass;glossy tiles",
+    "The memory of the illuminated pool"
+  ],
+  [
+    "Teal",
+    "#BCF5F0",
+    "Pale persian green",
+    "green-blue tiles;glazed ceramics;woven silk;polished beads",
+    "The memory of the tiled archway"
+  ],
+  [
+    "Teal",
+    "#9CF4F7",
+    "Pale caribbean teal",
+    "clear lagoon water;teal enamel;blue-green beads;painted boats",
+    "The memory of the island jetty"
+  ],
+  [
+    "Teal",
+    "#79E7B0",
+    "Pale peacock green",
+    "peacock feather eyes;green silk;iridescent beetle wings;glazed beads",
+    "The memory of the peacock in the courtyard"
+  ],
+  [
+    "Teal",
+    "#9DE7CF",
+    "Pale amazonite",
+    "amazonite stone;blue-green enamel;bright mineral seams;polished cabochons",
+    "The memory of the stone cutter's bench"
+  ],
+  [
+    "Teal",
+    "#75D0EB",
+    "Pale chrysocolla",
+    "chrysocolla veins;blue-green mineral dust;ceramic glaze;colored glass",
+    "The memory of the mineral stall"
+  ],
+  [
+    "Teal",
+    "#85FFE2",
+    "Pale mint enamel",
+    "mint enamel;bright candy;glossy green glaze;sunlit bottle glass",
+    "The memory of the painted mint tin"
+  ],
+  [
+    "Cyan",
+    "#99D1FA",
+    "Pale cyan ink",
+    "cyan printing ink;bright blue glass;pool tiles;painted signs",
+    "The memory of the printing press"
+  ],
+  [
+    "Cyan",
+    "#C7FEFF",
+    "Pale electric turquoise",
+    "turquoise enamel;bright lagoon water;blue-green silk;colored beads",
+    "The memory of the lit aquarium"
+  ],
+  [
+    "Cyan",
+    "#81BBDF",
+    "Pale pacific cyan",
+    "clear sea water;blue glass;bright tiles;painted shutters",
+    "The memory of the open sea crossing"
+  ],
+  [
+    "Cyan",
+    "#61EAFF",
+    "Pale aqua enamel",
+    "aqua enamel;glazed bowls;bright pool liners;blue-green glass",
+    "The memory of the enamel pitcher"
+  ],
+  [
+    "Cyan",
+    "#75ABD7",
+    "Pale blue zircon",
+    "zircon facets;blue gemstones;crystal glass;polished enamel",
+    "The memory of the zircon ring"
+  ],
+  [
+    "Cyan",
+    "#75C1FF",
+    "Pale capri blue",
+    "blue grotto water;cyan silk;sunlit sea;bright blue tiles",
+    "The memory of the grotto entrance"
+  ],
+  [
+    "Cyan",
+    "#A3EAFF",
+    "Pale swimming-pool blue",
+    "pool water;blue plastic;bright aqua glaze;sunlit glass",
+    "The memory of the swimming lane"
+  ],
+  [
+    "Blue",
+    "#94AEF0",
+    "Pale cobalt",
+    "cobalt pigment;blue glass;painted porcelain;deep blue silk",
+    "The memory of the cobalt jar"
+  ],
+  [
+    "Blue",
+    "#A2A0E3",
+    "Pale ultramarine",
+    "ultramarine paint;lapis dust;blue cloth;mineral pigment",
+    "The memory of the lapis workshop"
+  ],
+  [
+    "Blue",
+    "#BAB6ED",
+    "Pale indigo",
+    "indigo dye;blue-violet cloth;ink washes;dyed yarn",
+    "The memory of the indigo vat"
+  ],
+  [
+    "Blue",
+    "#979DFC",
+    "Pale klein blue",
+    "intense blue pigment;matte blue paint;blue canvas;dyed paper",
+    "The memory of the blue canvas"
+  ],
+  [
+    "Blue",
+    "#75AAFF",
+    "Pale egyptian blue",
+    "blue frit;painted stone;blue faience;mineral powder",
+    "The memory of the painted tomb wall"
+  ],
+  [
+    "Blue",
+    "#B6C8FB",
+    "Pale international blue",
+    "blue flags;painted signs;blue ribbons;bright enamel",
+    "The memory of the flag above the station"
+  ],
+  [
+    "Blue",
+    "#8198DF",
+    "Pale king's blue",
+    "blue silk;painted china;blue glass;ceremonial cloth",
+    "The memory of the royal-blue curtain"
+  ],
+  [
+    "Blue",
+    "#7989E7",
+    "Pale smalt",
+    "smalt glass;ground blue pigment;glazed beads;blue tiles",
+    "The memory of the glassmaker's furnace"
+  ],
+  [
+    "Blue",
+    "#8095F5",
+    "Pale lapis lazuli",
+    "lapis stone;blue cabochons;mineral veins;painted amulets",
+    "The memory of the stone in the pouch"
+  ],
+  [
+    "Blue",
+    "#4D8BFF",
+    "Pale electric blue",
+    "electric-blue ink;bright signs;blue lights;glossy enamel",
+    "The memory of the glowing blue sign"
+  ],
+  [
+    "Violet",
+    "#C99FF4",
+    "Pale electric violet",
+    "violet light;bright purple ink;dyed silk;colored glass",
+    "The memory of the violet-lit window"
+  ],
+  [
+    "Violet",
+    "#CE8EF6",
+    "Pale dioxazine violet",
+    "violet paint;purple pigment;dark petals;ink stains",
+    "The memory of the violet paint tube"
+  ],
+  [
+    "Violet",
+    "#B09CF7",
+    "Pale gentian",
+    "gentian petals;blue-violet glass;bright dye;silk ribbons",
+    "The memory of the mountain flower"
+  ],
+  [
+    "Violet",
+    "#B287EE",
+    "Pale pansy violet",
+    "pansy petals;purple cloth;violet glaze;painted beads",
+    "The memory of the pot of pansies"
+  ],
+  [
+    "Violet",
+    "#9487EE",
+    "Pale campanula",
+    "bellflower petals;violet-blue ink;bright ribbons;glazed ceramic",
+    "The memory of the bellflowers by the wall"
+  ],
+  [
+    "Violet",
+    "#DE97FC",
+    "Pale spectrum violet",
+    "violet pigment;purple light;dyed paper;bright enamel",
+    "The memory of the prism on the desk"
+  ],
+  [
+    "Violet",
+    "#CFBAF7",
+    "Pale fluorite violet",
+    "fluorite crystals;purple mineral veins;translucent beads;colored glass",
+    "The memory of the fluorite specimen"
+  ],
+  [
+    "Violet",
+    "#C07CF8",
+    "Pale aniline violet",
+    "aniline dye;violet silk;purple ink;stained cotton",
+    "The memory of the dye maker's table"
+  ],
+  [
+    "Purple",
+    "#F49FEA",
+    "Pale tyrian purple",
+    "purple-dyed wool;dark silk;berry stains;ceremonial cloth",
+    "The memory of the purple robe"
+  ],
+  [
+    "Purple",
+    "#EEB8F9",
+    "Pale royal purple",
+    "purple velvet;bright brocade;colored glass;dyed ribbons",
+    "The memory of the ceremonial room"
+  ],
+  [
+    "Purple",
+    "#F697FC",
+    "Pale electric purple",
+    "purple ink;bright lights;dyed silk;glossy enamel",
+    "The memory of the purple neon sign"
+  ],
+  [
+    "Purple",
+    "#E7ACE6",
+    "Pale cattleya",
+    "orchid petals;purple silk;floral ribbons;colored beads",
+    "The memory of the orchid display"
+  ],
+  [
+    "Purple",
+    "#F391D5",
+    "Pale byzantium",
+    "purple-red silk;dark berry juice;dyed wool;embroidered cloth",
+    "The memory of the embroidered cloak"
+  ],
+  [
+    "Purple",
+    "#EFCDF9",
+    "Pale petunia purple",
+    "petunia petals;bright fabric;purple glaze;flower dye",
+    "The memory of the hanging flower basket"
+  ],
+  [
+    "Purple",
+    "#FF85E9",
+    "Pale phlox purple",
+    "phlox flowers;purple-pink silk;bright ribbons;dyed paper",
+    "The memory of the phlox border"
+  ],
+  [
+    "Purple",
+    "#EF85FF",
+    "Pale purple enamel",
+    "purple enamel;painted jewelry;bright ceramic glaze;glass ornaments",
+    "The memory of the enameled brooch"
+  ],
+  [
+    "Pink",
+    "#DB84D1",
+    "Pale fuchsia",
+    "fuchsia flowers;bright magenta silk;berry dye;pink-purple glass",
+    "The memory of the fuchsia basket"
+  ],
+  [
+    "Pink",
+    "#FF61B3",
+    "Pale hot pink",
+    "hot-pink ink;bright satin;festival paper;painted toys",
+    "The memory of the pink festival banner"
+  ],
+  [
+    "Pink",
+    "#FB65DB",
+    "Pale cyclamen pink",
+    "cyclamen petals;bright pink ribbons;dyed silk;colored glass",
+    "The memory of the cyclamen on the sill"
+  ],
+  [
+    "Pink",
+    "#F183C3",
+    "Pale opera pink",
+    "pink pigment;bright rose petals;stage silk;painted fans",
+    "The memory of the opera fan"
+  ],
+  [
+    "Pink",
+    "#FDA5DA",
+    "Pale shocking pink",
+    "bright pink cloth;magenta ink;festival ribbons;pink enamel",
+    "The memory of the pink shop window"
+  ],
+  [
+    "Pink",
+    "#E391A5",
+    "Pale quinacridone rose",
+    "rose pigment;pink-red ink;rose petals;dyed linen",
+    "The memory of the rose-colored canvas"
+  ],
+  [
+    "Pink",
+    "#F183D9",
+    "Pale dragonfruit",
+    "dragonfruit skins;magenta fruit juice;pink glaze;bright pulp",
+    "The memory of the fruit market"
+  ],
+  [
+    "Pink",
+    "#FF75B8",
+    "Pale neon rose",
+    "rose-colored lights;pink lacquer;bright satin;red-pink glass",
+    "The memory of the neon-lit doorway"
+  ],
+  [
+    "Pink",
+    "#F68EB4",
+    "Pale cerise",
+    "cerise cloth;cherry juice;bright embroidery;berry-colored silk",
+    "The memory of the cerise scarf"
+  ],
+  [
+    "Pink",
+    "#CE7E90",
+    "Pale pink tourmaline",
+    "pink tourmaline;rose glass;polished gemstones;bright crystal facets",
+    "The memory of the tourmaline pendant"
+  ],
+  [
+    "Neutral",
+    "#C3C6D0",
+    "Pale blue ash",
+    "cool ash;blue-gray stone;dull steel;gray wool",
+    "The memory of the cold fireplace"
+  ],
+  [
+    "Neutral",
+    "#9BB0A2",
+    "Pale green flint",
+    "green-gray flint;weathered stone;gray-green cloth;dull glass",
+    "The memory of the flint on the path"
+  ],
+  [
+    "Neutral",
+    "#B9A6AB",
+    "Pale rose graphite",
+    "rose-gray stone;muted pink wool;dusky plaster;soft graphite",
+    "The memory of the gray drawing room"
+  ],
+  [
+    "Neutral",
+    "#A39BB0",
+    "Pale violet concrete",
+    "violet-gray concrete;shadowed stone;dusky wool;gray-purple plaster",
+    "The memory of the concrete stairwell"
+  ]
+];
+families.push(['Black', []]);
+for (const [family, hex, name, associations, story] of writerExpansion) {
+  families.find(([label]) => label === family)[1].push([hex, name, associations, story]);
+}
+// END WRITER EXPANSION
+const colors = families.flatMap(([family, rows])=>rows.map(([hex,name,associations,story],i)=>({family,hex,name,associations:[...associations.split(";"),...(i<8&&extraAssociations[family]?extraAssociations[family][i]:[])],story})));

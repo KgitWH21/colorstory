@@ -13,16 +13,18 @@ const context = vm.createContext({
   cancelAnimationFrame: id => frames.delete(id)
 });
 vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'wheel.js'), 'utf8'), context);
+vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'colors.js'), 'utf8'), context);
+const count = vm.runInContext('colors.length', context);
 const { WheelMath, SpinWheel } = vm.runInContext('({ WheelMath, SpinWheel })', context);
 
-test('all 416 shades land under the pointer across multiple full turns', () => {
-  for (let index = 0; index < 416; index++) {
+test('every shade lands under the pointer across multiple full turns', () => {
+  for (let index = 0; index < count; index++) {
     for (const turns of [-5, 0, 7]) {
-      assert.equal(WheelMath.index(WheelMath.angle(index, 416) + turns * 360, 416), index);
+      assert.equal(WheelMath.index(WheelMath.angle(index, count) + turns * 360, count), index);
     }
   }
-  assert.equal(WheelMath.index(WheelMath.angle(35, 416) + 90, 416), 347);
-  assert.equal(WheelMath.index(WheelMath.angle(35, 416) - 90, 416), 139);
+  assert.equal(WheelMath.index(WheelMath.angle(35, count) + 90, count), (35 + count * .75) % count);
+  assert.equal(WheelMath.index(WheelMath.angle(35, count) - 90, count), (35 + count * .25) % count);
 });
 
 test('crossing the pointer-angle seam makes a small movement in either direction', () => {
@@ -39,7 +41,7 @@ function harness(reduced = true) {
     setPointerCapture: id => captured.add(id), hasPointerCapture: id => captured.has(id), releasePointerCapture: id => captured.delete(id),
     classList: { add: name => classes.add(name), remove: name => classes.delete(name) }
   };
-  const shades = Array.from({ length: 416 }, (_, index) => ({ name: `Shade ${index}`, hex: '#000000' }));
+  const shades = Array.from({ length: count }, (_, index) => ({ name: `Shade ${index}`, hex: '#000000' }));
   const wheel = new SpinWheel(control, { style: {} }, shades, { reduced: () => reduced, onPreview: c => previews.push(c), onSelect: c => selections.push(c), onBusy: value => busy.push(value), onSpin() {} });
   wheel.setColor(shades[35]);
   const event = (x, y, extra = {}) => ({ clientX: x, clientY: y, isPrimary: true, button: 0, pointerId: 1, preventDefault() {}, ...extra });
@@ -51,9 +53,9 @@ test('dragging rotates directly and cancellation releases capture and selects th
   h.wheel.startDrag(h.event(500, 280));
   clock += 20;
   h.wheel.moveDrag(h.event(280, 500));
-  assert.equal(h.previews.at(-1), h.shades[347]);
+  assert.equal(h.previews.at(-1), h.shades[(35 + count * .75) % count]);
   h.wheel.endDrag(h.event(280, 500), true);
-  assert.equal(h.selections.at(-1), h.shades[347]);
+  assert.equal(h.selections.at(-1), h.shades[(35 + count * .75) % count]);
   assert.equal(h.wheel.busy, false);
   assert.equal(h.captured.size, 0);
   assert.equal(h.classes.size, 0);
@@ -84,9 +86,9 @@ test('passing through the center does not cause a half-turn jump', () => {
 test('keyboard access reaches every endpoint and wraps through the collection', () => {
   const h = harness(), key = key => h.wheel.keydown({ key, preventDefault() {} });
   key('Home'); assert.equal(h.selections.at(-1), h.shades[0]);
-  key('ArrowLeft'); assert.equal(h.selections.at(-1), h.shades[415]);
+  key('ArrowLeft'); assert.equal(h.selections.at(-1), h.shades[count - 1]);
   key('ArrowRight'); assert.equal(h.selections.at(-1), h.shades[0]);
-  key('End'); assert.equal(h.selections.at(-1), h.shades[415]);
+  key('End'); assert.equal(h.selections.at(-1), h.shades[count - 1]);
 });
 
 function advance(milliseconds) {

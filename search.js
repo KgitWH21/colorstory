@@ -15,7 +15,7 @@ const ColorSearch = (() => {
     { name: 'pink', families: ['Pink'], nearby: ['Purple', 'Red'], anchor: 'Blush', featured: ['Blush', 'Deep rose', 'Flamingo', 'Old rose', 'Raspberry', 'Petal pink'], terms: ['rose', 'petal', 'pink', 'ribbon', 'blossom', 'satin', 'peony', 'grapefruit'] },
     { name: 'brown', families: ['Rust', 'Orange', 'Neutral'], anchor: 'Mahogany', featured: ['Mahogany', 'Chestnut', 'Burnt umber', 'Saddle brown', 'Taupe', 'Roasted coffee'], filter: c => c.hsl[2] < .53 && c.hsl[0] < 65 && c.hsl[1] > .12, terms: ['wood', 'leather', 'bark', 'earth', 'coffee', 'walnut', 'tobacco', 'soil'] },
     { name: 'gray', aliases: ['grey'], families: ['Neutral'], anchor: 'Pewter', featured: ['Charcoal', 'Graphite', 'Pewter', 'Silver gray', 'Dove gray', 'Chalk'], filter: c => c.hsl[1] < .18, terms: ['fog', 'stone', 'slate', 'silver', 'gray', 'grey', 'rain', 'ash', 'graphite'] },
-    { name: 'black', families: ['Neutral'], anchor: 'Charcoal', featured: ['Charcoal', 'Graphite', 'Oxblood', 'Midnight blue', 'Blackberry', 'Deep petrol'], filter: c => c.hsl[2] < .23, terms: ['coal', 'charred', 'blackened', 'shadow', 'night', 'dark', 'ink'] },
+    { name: 'black', families: ['Black', 'Neutral'], anchor: 'Absolute black', featured: ['Absolute black', 'Soot black', 'Black coffee', 'Raven black', 'Black olive', 'Black plum'], filter: c => c.family === 'Black' || c.hsl[2] < .23, terms: ['coal', 'charred', 'blackened', 'shadow', 'night', 'dark', 'ink'] },
     { name: 'white', families: ['Neutral', 'Gold'], anchor: 'Chalk', featured: ['Chalk', 'Ivory', 'Blue frost', 'Pale lichen', 'Porcelain blue', 'Petal pink'], filter: c => c.hsl[2] > .83, terms: ['chalk', 'white', 'porcelain', 'frost', 'linen', 'limestone', 'pale', 'snow'] }
   ];
 
@@ -47,6 +47,13 @@ const ColorSearch = (() => {
   function familyGroup(color) {
     return groups.find(g => g.families.includes(color.family)) || groups.find(g => g.name === 'gray');
   }
+  function resolveMood(value) {
+    const query=normalize(value),parsed=ColorMoods.parse(query);
+    if(!parsed)return null;
+    let matches=ColorMoods.matches(parsed.mood.id);
+    if(parsed.rest){const related=resolve(parsed.rest);matches=matches.filter(c=>related?.matches.includes(c));}
+    return {query,kind:'mood',mood:parsed.mood,anchor:matches[0]||null,matches,group:null};
+  }
   function resolve(value) {
     const query = normalize(value);
     if (!query) return null;
@@ -67,6 +74,8 @@ const ColorSearch = (() => {
       const matches = nearest(hex);
       return { query, kind: 'hex', hex, anchor: matches[0], matches, group: familyGroup(matches[0]) };
     }
+    const moodQuery=resolveMood(query);
+    if(moodQuery)return moodQuery;
     const words = query.split(' ');
     const hits = index.filter(item => words.every(word => item.name.includes(word) || normalize(item.color.family).includes(word)));
     hits.sort((a, b) => Number(b.name.startsWith(query)) - Number(a.name.startsWith(query)) || a.name.localeCompare(b.name));
@@ -90,5 +99,5 @@ const ColorSearch = (() => {
       return best;
     }).filter(Boolean).sort((a, b) => b.score - a.score || a.color.name.localeCompare(b.color.name));
   }
-  return { resolve, imagery, nearest, parseHex };
+  return { resolve, resolveMood, imagery, nearest, parseHex };
 })();

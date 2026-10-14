@@ -1,6 +1,6 @@
 COLOR STORY — A writer’s color wheel
 
-416 named shades, sensory associations, story-name prompts, HEX/RGB values,
+832 named shades, sensory associations, story-name prompts, HEX/RGB values,
 and three companion-color modes. No accounts, API keys, dependencies, or build step.
 
 TRY IT ON YOUR COMPUTER
@@ -20,7 +20,7 @@ Open the extracted folder. colors.js contains the color collection.
 Each row is [HEX, shade name, four associations separated by ;, story name].
 style.css controls the layout. app.js controls the wheel and palette matching.
 The smooth wheel represents the flow of hues; its center shows the exact
-selected shade. All 416 shades remain selectable. Drag with a finger or mouse
+selected shade. All 832 shades remain selectable. Drag with a finger or mouse
 and release to coast and land on a named shade. The Spin button picks randomly.
 Arrow keys browse shades, Space/Enter spins, and Escape stops motion. Color
 information appears below the larger wheel. Reduced motion skips coasting.
@@ -42,3 +42,23 @@ search.js contains matching rules and the curated imagery vocabulary.
 
 OFFLINE UPDATES
 After changing files, increment CACHE in sw.js, redeploy, and reload online.
+
+MOOD SEARCH
+Choose By mood or search calm, tender, uneasy, austere, festive, weathered,
+mysterious, hopeful, melancholy, or nostalgic. Combine a mood and color
+(e.g. calm blue or uneasy green). Mood associations are editorial suggestions,
+not universal color meanings. Mood search works offline.
+
+GUIDED SPINS AND RECENT DISCOVERIES
+Choose a color family and/or mood under the wheel to guide the Spin button.
+Drag freely to explore the entire wheel. Empty combinations explain how to
+change or reset guidance. The last 12 selected shades appear under Recent
+discoveries; tap one to return to it. History is stored in this browser when
+local storage is available. Clear recent removes it.
+
+PALETTE EXPANSION
+The 832-shade collection preserves the original 416 and adds vivid pigments,
+tinted neutrals, and a dedicated family of 24 blacks. scripts/expand-palette.cjs
+is an optional offline authoring tool that regenerates the static expansion;
+it is not needed to run the app. moods.js defines mood associations and
+discovery.js handles spin pools and recent history.

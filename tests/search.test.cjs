@@ -10,6 +10,7 @@ vm.runInContext(fs.readFileSync(path.join(root, 'colors.js'), 'utf8'), context);
 // Use the app's actual color preprocessing, without loading its DOM interface.
 const app = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
 vm.runInContext(app.slice(0, app.indexOf('const wheelColors')), context);
+vm.runInContext(fs.readFileSync(path.join(root, 'moods.js'), 'utf8'), context);
 vm.runInContext(fs.readFileSync(path.join(root, 'search.js'), 'utf8'), context);
 const evaluate = code => vm.runInContext(code, context);
 
@@ -33,7 +34,7 @@ test('exact shade names and HEX values find the original shade first', () => {
   }
   assert.equal(evaluate('ColorSearch.resolve("#abc").hex'), '#AABBCC');
   assert.equal(evaluate('ColorSearch.resolve("Red earth").anchor.name'), 'Red earth');
-  assert.equal(evaluate('ColorSearch.resolve("#000000").matches[0].name'), 'Soot black');
+  assert.equal(evaluate('ColorSearch.resolve("#000000").matches[0].name'), 'Absolute black');
 });
 
 test('partial shade names and families remain searchable', () => {

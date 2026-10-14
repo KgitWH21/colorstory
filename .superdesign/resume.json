@@ -12,18 +12,18 @@
         "style.css"
       ],
       "fingerprints": {
-        ".superdesign/design-system.md": "f15d56b3852512b1de80cd604c2ba50448643d453aedb20663d23e52b8116fe0",
-        "index.html": "f6b643f60ec84e6e8442b31ac89e2377cd8999b704e11ae211e4be3b1c4469a9",
-        "style.css": "f0298181bbe8a2fccd6deba5a178ac184e1e9c978fd126bad16ab8a630d511ed"
+        ".superdesign/design-system.md": "8d1bcf4e8ccf15e5de6a5d34b175ae696c34fdba8430193db8a9f52e707e12e4",
+        "index.html": "5c6c4f2c52690477486d14b0fcb827faabe81ed558dcc94ee1aa4a8df3d6e9d5",
+        "style.css": "999acd498d01ad72bfabe5b3e3493b91aa80db118306facf4b6322f69b335894"
       },
       "drafts": {
         "7ec88932-4989-4a9d-8250-34e18ee3c1e7": {
           "title": "Color Story \u2014 Vertical Wheel Experience",
-          "visualDirection": "Larger smooth hue ring, drag and momentum interaction, centered selected shade, color details below the wheel",
-          "currentVersion": 2
+          "visualDirection": "Centered smooth wheel, details below; mood search, guided family/mood spins, recent discoveries; 832 shades including 24 blacks",
+          "currentVersion": 3
         }
       },
-      "updatedAt": "2026-10-14T00:09:56.220069+00:00"
+      "updatedAt": "2026-10-14T21:48:55.413264+00:00"
     }
   }
 }
